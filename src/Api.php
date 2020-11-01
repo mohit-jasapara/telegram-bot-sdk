@@ -307,6 +307,42 @@ class Api
     }
 
     /**
+     * Edit text messages sent by the bot.
+     *
+     * <code>
+     * $params = [
+     *   'chat_id'                  => '',
+     *   'message_id'               => '',
+     *   'inline_message_id'        => '',
+     *   'text'                     => '',
+     *   'parse_mode'               => '',
+     *   'disable_web_page_preview' => '',
+     *   'reply_markup'             => '',
+     * ];
+     * </code>
+     *
+     * @link https://core.telegram.org/bots/api#editmessagetext
+     *
+     * @param array    $params
+     *
+     * @var int|string $chat_id                  Optional. Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @var int        $message_id               Optional. Required if inline_message_id is not specified. Identifier of the sent message
+     * @var string     $inline_message_id        Optional. Required if chat_id and message_id are not specified. Identifier of the inline message
+     * @var string     $text                     Required. New text of the message.
+     * @var string     $parse_mode               Optional. Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in your bot's message.
+     * @var bool       $disable_web_page_preview Optional. Disables link previews for links in this message
+     * @var string     $reply_markup             Optional. A JSON-serialized object for an inline keyboard.
+     *
+     * @return Message
+     */
+    public function editMessageText(array $params)
+    {
+        $response = $this->post('editMessageText', $params);
+
+        return new Message($response->getDecodedBody());
+    }
+
+    /**
      * Forward messages of any kind.
      *
      * <code>
